@@ -107,19 +107,20 @@ const TableComponent = () => {
                 <td className='px-6 py-4'> {customer.createdAt} </td>
                 <td className='px-6 py-4'> {customer.updatedAt} </td>
 
-                <td className='px-2 py-4 '>
-                  <Button
+                <td className='px-6 py-4 '>
+                  <button
                     className='font-medium text-blue-600 dark:text-blue-500 hover:underline px-0'
                     onClick={() => {
+                      setModalData(customer)
                       setShowEditModal(true)
                     }}
                   >
                     Edit
-                  </Button>
+                  </button>
                   <EditModal onClose={() => setShowEditModal(false)} show={showEditModal} />
                 </td>
                 <td className='px-6 py-4 '>
-                  <Button
+                  <button
                     className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
                     onClick={() => {
                       setShowDeleteModal(true)
@@ -127,19 +128,38 @@ const TableComponent = () => {
                     }}
                   >
                     Delete
-                  </Button>
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {modalData && (
+        <EditModal
+          cst_id={modalData.id}
+          cst_first={modalData.first_name}
+          cst_last={modalData.last_name}
+          show={showEditModal}
+          onClose={() => {
+            setShowEditModal(false)
+            setModalData(null)
+          }}
+          onDelete={() => {
+            dispatch(deleteCustomer(modalData.id))
+            setModalData(null)
+          }}
+        />
+      )}
 
       {modalData && (
         <DeleteModal
           test={modalData.id}
           show={showDeleteModal}
-          onClose={() => setShowDeleteModal(false)}
+          onClose={() => {
+            setShowDeleteModal(false)
+            setModalData(null)
+          }}
           onDelete={() => {
             dispatch(deleteCustomer(modalData.id))
             setModalData(null)

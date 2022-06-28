@@ -7,18 +7,6 @@ const TableComponent = () => {
     const dispatch = useDispatch()
     const customers = useSelector((state) => state.customers.customers)
 
-    // const customers = [
-    //     {
-    //         id: 1,
-    //         first_name: 'ugur',
-    //         last_name: 'firat',
-    //         email: 'ugur@firat.com',
-    //         birthdate: '1111-11-11',
-    //         createdAt: '2022-04-02T02:03:52.000Z',
-    //         updatedAt: '2022-04-05T10:04:05.000Z',
-    //     },
-    // ]
-
     return (
         <div className=''>
             <div className='flex items-center justify-end p-4'>
@@ -32,6 +20,9 @@ const TableComponent = () => {
                                 first_name: 'ugur1',
                                 last_name: 'firat1',
                                 email: 'ugur@firat1.com',
+                                birthdate: '1111-11-11',
+                                createdAt: '2022-04-02T02:03:52.000Z',
+                                updatedAt: '2022-04-05T10:04:05.000Z',
                             })
                         )
                     }}

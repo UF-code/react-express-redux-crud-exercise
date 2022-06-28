@@ -1,75 +1,92 @@
 import React from 'react'
 
 const TableComponent = () => {
-    const products = [
+    const customers = [
         {
-            product_name: 'Apple MacBook Pro 17"',
-            color: 'Silver',
-            category: 'Laptop',
-            price: '2999',
-        },
-        {
-            product_name: 'Microsoft Surface Pro',
-            color: 'White',
-            category: 'Laptop PC',
-            price: '1999',
-        },
-        {
-            product_name: 'Magic Mouse 2',
-            color: 'Black',
-            category: 'Accessories',
-            price: '99',
+            id: 1,
+            first_name: 'ugur',
+            last_name: 'firat',
+            email: 'ugur@firat.com',
+            birthdate: '1111-11-11',
+            createdAt: '2022-04-02T02:03:52.000Z',
+            updatedAt: '2022-04-05T10:04:05.000Z',
         },
     ]
 
     return (
-        <div className='flex'>
-            <button
-                type='button'
-                class='text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 m-4 '
-            >
-                Add New Product
-            </button>
+        <div className=''>
+            <div className='flex items-center justify-end p-4'>
+                <button
+                    type='button'
+                    class='text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
+                >
+                    Add New Customer
+                </button>
+            </div>
 
             <div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
                 <table class='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
                     <thead class='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                         <tr>
                             <th scope='col' class='px-6 py-3'>
-                                Product name
+                                ID
                             </th>
                             <th scope='col' class='px-6 py-3'>
-                                Color
+                                First Name
                             </th>
                             <th scope='col' class='px-6 py-3'>
-                                Category
+                                Last Name
                             </th>
                             <th scope='col' class='px-6 py-3'>
-                                Price
+                                Email
+                            </th>
+                            <th scope='col' class='px-6 py-3'>
+                                Birthdate
+                            </th>
+                            <th scope='col' class='px-6 py-3'>
+                                Created At
+                            </th>
+                            <th scope='col' class='px-6 py-3'>
+                                Updated At
                             </th>
                             <th scope='col' class='px-6 py-3'>
                                 <span class='sr-only'>Edit</span>
                             </th>
+                            <th scope='col' class='px-6 py-3'>
+                                <span class='sr-only'>Delete</span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product) => (
+                        {customers.map((customer) => (
                             <tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
                                 <th
                                     scope='row'
                                     class='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
                                 >
-                                    {product.product_name}
+                                    {customer.id}
                                 </th>
-                                <td class='px-6 py-4'> {product.color} </td>
-                                <td class='px-6 py-4'> {product.category} </td>
-                                <td class='px-6 py-4'>${product.price} </td>
+                                <td class='px-6 py-4'> {customer.first_name} </td>
+                                <td class='px-6 py-4'> {customer.last_name} </td>
+                                <td class='px-6 py-4'> {customer.email} </td>
+                                <td class='px-6 py-4'> {customer.birthdate} </td>
+                                <td class='px-6 py-4'> {customer.createdAt} </td>
+                                <td class='px-6 py-4'> {customer.updatedAt} </td>
+
                                 <td class='px-6 py-4 text-right'>
                                     <a
                                         href='#'
                                         class='font-medium text-blue-600 dark:text-blue-500 hover:underline'
                                     >
                                         Edit
+                                    </a>
+                                </td>
+                                <td class='px-6 py-4 text-right'>
+                                    <a
+                                        href='#'
+                                        class='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+                                    >
+                                        Delete
                                     </a>
                                 </td>
                             </tr>

@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import EditModal from './modals/edit.modal.component'
+import { Button } from 'flowbite-react'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { addCustomer, deleteCustomer } from '../redux/customerSlice'
@@ -6,6 +9,8 @@ import { addCustomer, deleteCustomer } from '../redux/customerSlice'
 const TableComponent = () => {
     const dispatch = useDispatch()
     const customers = useSelector((state) => state.customers.customers)
+
+    const [show, setShow] = useState(false)
 
     return (
         <div className=''>
@@ -57,10 +62,10 @@ const TableComponent = () => {
                                 Updated At
                             </th>
                             <th scope='col' class='px-6 py-3'>
-                                <span class='sr-only'>Edit</span>
+                                Edit
                             </th>
                             <th scope='col' class='px-6 py-3'>
-                                <span class='sr-only'>Delete</span>
+                                Delete
                             </th>
                         </tr>
                     </thead>
@@ -80,15 +85,27 @@ const TableComponent = () => {
                                 <td class='px-6 py-4'> {customer.createdAt} </td>
                                 <td class='px-6 py-4'> {customer.updatedAt} </td>
 
-                                <td class='px-6 py-4 text-right'>
-                                    <button
-                                        href='#'
+                                <td class='px-2 py-4 '>
+                                    {/* <button
                                         class='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+                                        onClick={() => setShow(true)}
                                     >
                                         Edit
                                     </button>
+                                    <Modal onClose={() => setShow(false)} show={show} /> */}
+
+                                    {/* <!-- Modal toggle --> */}
+                                    <Button
+                                        class='font-medium text-blue-600 dark:text-blue-500 hover:underline px-0'
+                                        onClick={() => {
+                                            setShow(true)
+                                        }}
+                                    >
+                                        Edit
+                                    </Button>
+                                    <EditModal onClose={() => setShow(false)} show={show} />
                                 </td>
-                                <td class='px-6 py-4 text-right'>
+                                <td class='px-6 py-4 '>
                                     <button
                                         class='font-medium text-blue-600 dark:text-blue-500 hover:underline'
                                         onClick={() => {

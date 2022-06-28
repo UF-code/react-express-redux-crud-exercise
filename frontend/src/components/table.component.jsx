@@ -1,17 +1,23 @@
 import React from 'react'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { addCustomer, deleteCustomer } from '../redux/customerSlice'
+
 const TableComponent = () => {
-    const customers = [
-        {
-            id: 1,
-            first_name: 'ugur',
-            last_name: 'firat',
-            email: 'ugur@firat.com',
-            birthdate: '1111-11-11',
-            createdAt: '2022-04-02T02:03:52.000Z',
-            updatedAt: '2022-04-05T10:04:05.000Z',
-        },
-    ]
+    const dispatch = useDispatch()
+    const customers = useSelector((state) => state.customers.customers)
+
+    // const customers = [
+    //     {
+    //         id: 1,
+    //         first_name: 'ugur',
+    //         last_name: 'firat',
+    //         email: 'ugur@firat.com',
+    //         birthdate: '1111-11-11',
+    //         createdAt: '2022-04-02T02:03:52.000Z',
+    //         updatedAt: '2022-04-05T10:04:05.000Z',
+    //     },
+    // ]
 
     return (
         <div className=''>
@@ -19,6 +25,16 @@ const TableComponent = () => {
                 <button
                     type='button'
                     class='text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
+                    onClick={() => {
+                        dispatch(
+                            addCustomer({
+                                id: 2,
+                                first_name: 'ugur1',
+                                last_name: 'firat1',
+                                email: 'ugur@firat1.com',
+                            })
+                        )
+                    }}
                 >
                     Add New Customer
                 </button>

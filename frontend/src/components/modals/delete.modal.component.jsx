@@ -1,65 +1,43 @@
 import React from 'react'
-import { Button, Label, TextInput, Checkbox, Modal } from 'flowbite-react'
+import { Button, Modal } from 'flowbite-react'
 
-const EditModal = (props) => {
-    if (!props.show) {
-        return null
-    }
-
+const DeleteModal = (props) => {
     return (
         <Modal show={props.show} size='md' popup={true} onClose={props.onClose}>
-            {/* <Modal show={true} size='md' popup={true}> */}
             <Modal.Header />
             <Modal.Body>
-                <div className='space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8'>
-                    <h3 className='text-xl font-medium text-gray-900 dark:text-white'>
-                        Sign in to our platform
+                <div className='text-center'>
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        strokeWidth={2}
+                    >
+                        <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                        />
+                    </svg>
+
+                    <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
+                        Are you sure you want to delete this customer?
                     </h3>
-                    <div>
-                        <div className='mb-2 block'>
-                            <Label htmlFor='email' value='Your email' />
-                        </div>
-                        <TextInput
-                            id='email'
-                            className='dark:border-gray-500 dark:bg-gray-600'
-                            placeholder='name@company.com'
-                            required={true}
-                        />
-                    </div>
-                    <div>
-                        <div className='mb-2 block'>
-                            <Label htmlFor='password' value='Your password' />
-                        </div>
-                        <TextInput
-                            id='password'
-                            className='dark:border-gray-500 dark:bg-gray-600'
-                            type='password'
-                            required={true}
-                        />
-                    </div>
-                    <div className='flex justify-between'>
-                        <div className='flex items-center gap-2'>
-                            <Checkbox id='remember' />
-                            <Label htmlFor='remember'>Remember me</Label>
-                        </div>
-                        <a
-                            href='/modal'
-                            className='text-sm text-blue-700 hover:underline dark:text-blue-500'
+                    <div className='flex justify-center gap-4'>
+                        <Button
+                            color='failure'
+                            onClick={() => {
+                                props.onDelete()
+                                props.onClose()
+                            }}
                         >
-                            Lost Password?
-                        </a>
-                    </div>
-                    <div className='w-full'>
-                        <Button>Log in to your account</Button>
-                    </div>
-                    <div className='text-sm font-medium text-gray-500 dark:text-gray-300'>
-                        Not registered?{' '}
-                        <a
-                            href='/modal'
-                            className='text-blue-700 hover:underline dark:text-blue-500'
-                        >
-                            Create account
-                        </a>
+                            Yes, I'm sure
+                        </Button>
+                        <Button color='gray' onClick={props.onClose}>
+                            No, cancel
+                        </Button>
                     </div>
                 </div>
             </Modal.Body>
@@ -67,4 +45,4 @@ const EditModal = (props) => {
     )
 }
 
-export default EditModal
+export default DeleteModal

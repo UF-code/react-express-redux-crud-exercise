@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Label, TextInput, Checkbox, Modal } from 'flowbite-react'
 
-const EditModal = (props) => {
+const AddModal = (props) => {
     if (!props.show) {
         return null
     }
@@ -13,7 +13,7 @@ const EditModal = (props) => {
             <Modal.Body>
                 <div className='space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8'>
                     <h3 className='text-xl font-medium text-gray-900 dark:text-white'>
-                        Sign in to our platform
+                        Add New Customer
                     </h3>
                     <div>
                         <div className='mb-2 block'>
@@ -67,4 +67,4 @@ const EditModal = (props) => {
     )
 }
 
-export default EditModal
+export default AddModal

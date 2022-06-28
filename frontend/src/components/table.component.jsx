@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
+// import AddModal from './modals/add.modal.component'
 import EditModal from './modals/edit.modal.component'
+import DeleteModal from './modals/delete.modal.component'
 import { Button, Avatar } from 'flowbite-react'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -125,14 +127,19 @@ const TableComponent = () => {
                                     />
                                 </td>
                                 <td class='px-6 py-4 '>
-                                    <button
+                                    <Button
                                         class='font-medium text-blue-600 dark:text-blue-500 hover:underline'
                                         onClick={() => {
-                                            dispatch(deleteCustomer(customer.id))
+                                            setShowDeleteModal(true)
                                         }}
                                     >
                                         Delete
-                                    </button>
+                                    </Button>
+                                    <DeleteModal
+                                        show={showDeleteModal}
+                                        onClose={() => setShowDeleteModal(false)}
+                                        onDelete={() => dispatch(deleteCustomer(customer.id))}
+                                    />
                                 </td>
                             </tr>
                         ))}

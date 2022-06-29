@@ -1,7 +1,26 @@
 import React from 'react'
 import { Button, Modal } from 'flowbite-react'
 
+import { deleteCustomer } from '../../redux/customerSlice'
+import { useDispatch } from 'react-redux'
+
+import axios from '../../axios/axios'
+
 const DeleteModal = (props) => {
+  const dispatch = useDispatch()
+
+  const deleteThatCustomer = (id) => {
+    axios
+      .delete(`/deleteCustomer/${id}`)
+      .then((response) => {
+        dispatch(deleteCustomer(id))
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <Modal show={props.show} size='md' popup={true} onClose={props.onClose}>
       <Modal.Header />
@@ -29,6 +48,7 @@ const DeleteModal = (props) => {
             <Button
               color='failure'
               onClick={() => {
+                deleteThatCustomer(props.test)
                 props.onDelete()
                 props.onClose()
               }}

@@ -5,11 +5,10 @@ import EditModal from './modals/edit.modal.component'
 import DeleteModal from './modals/delete.modal.component'
 // import { Button, Modal } from 'flowbite-react'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { deleteCustomer } from '../redux/customerSlice'
+import { useSelector } from 'react-redux'
 
 const TableComponent = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const customers = useSelector((state) => state.customers.customers)
   // const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
 
@@ -114,8 +113,8 @@ const TableComponent = () => {
                   <button
                     className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
                     onClick={() => {
-                      setShowDeleteModal(true)
                       setModalData(customer)
+                      setShowDeleteModal(true)
                     }}
                   >
                     Delete
@@ -146,7 +145,7 @@ const TableComponent = () => {
             setModalData(null)
           }}
           onDelete={() => {
-            dispatch(deleteCustomer(modalData.id))
+            // dispatch(deleteCustomer(modalData.id))
             setModalData(null)
           }}
         />
@@ -161,7 +160,6 @@ const TableComponent = () => {
             setModalData(null)
           }}
           onDelete={() => {
-            dispatch(deleteCustomer(modalData.id))
             setModalData(null)
           }}
         />

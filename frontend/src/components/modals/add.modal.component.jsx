@@ -44,7 +44,15 @@ const AddModal = (props) => {
   }
 
   return (
-    <Modal show={props.show} size='md' popup={true} onClose={props.onClose}>
+    <Modal
+      show={props.show}
+      size='md'
+      popup={true}
+      onClose={() => {
+        cleanCustomer()
+        props.onClose()
+      }}
+    >
       <Modal.Header />
       <Modal.Body>
         <div className='space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8'>

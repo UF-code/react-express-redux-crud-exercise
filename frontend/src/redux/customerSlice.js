@@ -14,13 +14,16 @@ export const customerSlice = createSlice({
       state.customers = [...action.payload]
     },
     editCustomer: (state, action) => {
-      // state.tmpCustomer =
-      // console.log(state.tmpCustomer)
-      // console.log(state.customers.find(({ id }) => id === action.payload))
-      // console.log('HEY')
-      // const cst = state.customers.filter((customer) => customer.id === action.payload)[0]
-      // const cst = [...state.customers.filter((customer) => customer.id === action.payload)]
-      // console.log(cst)
+      state.customers.find((customer) => customer.id === action.payload.id).first_name =
+        action.payload.first_name
+      state.customers.find((customer) => customer.id === action.payload.id).last_name =
+        action.payload.last_name
+      state.customers.find((customer) => customer.id === action.payload.id).email =
+        action.payload.email
+      state.customers.find((customer) => customer.id === action.payload.id).birthdate =
+        action.payload.birthdate
+
+      state.customers = [...state.customers]
     },
     deleteCustomer: (state, action) => {
       state.customers = [...state.customers.filter((customer) => customer.id !== action.payload)]

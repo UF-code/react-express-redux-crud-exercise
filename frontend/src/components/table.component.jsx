@@ -6,12 +6,12 @@ import DeleteModal from './modals/delete.modal.component'
 // import { Button, Modal } from 'flowbite-react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addCustomer, deleteCustomer, temporaryCustomer } from '../redux/customerSlice'
+import { deleteCustomer } from '../redux/customerSlice'
 
 const TableComponent = () => {
   const dispatch = useDispatch()
   const customers = useSelector((state) => state.customers.customers)
-  const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
+  // const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
 
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
@@ -24,19 +24,6 @@ const TableComponent = () => {
         <button
           type='button'
           className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800'
-          // onClick={() => {
-          //   dispatch(
-          //     addCustomer({
-          //       id: 26,
-          //       first_name: 'ugur1',
-          //       last_name: 'firat1',
-          //       email: 'ugur@firat1.com',
-          //       birthdate: '1111-11-11',
-          //       createdAt: '2022-04-02T02:03:52.000Z',
-          //       updatedAt: '2022-04-05T10:04:05.000Z',
-          //     })
-          //   )
-          // }}
           onClick={() => {
             setShowAddModal(true)
           }}
@@ -145,10 +132,7 @@ const TableComponent = () => {
         onClose={() => {
           setShowAddModal(false)
         }}
-        onAddNewCustomer={() => {
-          console.log('hey')
-          setShowAddModal(false)
-        }}
+        onAddNewCustomer={() => {}}
       />
 
       {modalData && (

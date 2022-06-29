@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 import { Label, TextInput, Modal } from 'flowbite-react'
 
 import { useDispatch } from 'react-redux'
-import { temporaryCustomer } from '../../redux/customerSlice'
+import { addCustomer } from '../../redux/customerSlice'
+
+import axios from '../../axios/axios'
 
 const AddModal = (props) => {
   const dispatch = useDispatch()
 
-  const [customerFirst, setCustomerFirst] = useState(null)
-  const [customerLast, setCustomerLast] = useState(null)
-  const [customerEmail, setCustomerEmail] = useState(null)
-  const [customerBirthDate, setCustomerBirthDate] = useState(null)
+  const [customerFirst, setCustomerFirst] = useState('')
+  const [customerLast, setCustomerLast] = useState('')
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerBirthDate, setCustomerBirthDate] = useState('')
 
   const handleNameChange = (e) => setCustomerFirst(e.target.value)
   const handleLastChange = (e) => setCustomerLast(e.target.value)
@@ -18,22 +20,27 @@ const AddModal = (props) => {
   const handleBirthChange = (e) => setCustomerBirthDate(e.target.value)
 
   const cleanCustomer = () => {
-    setCustomerFirst(null)
-    setCustomerLast(null)
-    setCustomerEmail(null)
-    setCustomerBirthDate(null)
+    setCustomerFirst('')
+    setCustomerLast('')
+    setCustomerEmail('')
+    setCustomerBirthDate('')
   }
 
-  const addCustomer = () => {
-    dispatch(
-      temporaryCustomer({
-        id: Math.floor(Math.random() * 100) + 1,
+  const addNewCustomer = () => {
+    axios
+      .post('/addCustomer', {
         first_name: customerFirst,
         last_name: customerLast,
         email: customerEmail,
         birthdate: customerBirthDate,
       })
-    )
+      .then((response) => {
+        dispatch(addCustomer(response.data))
+        cleanCustomer()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (
@@ -50,6 +57,7 @@ const AddModal = (props) => {
               id='first_name'
               className='dark:border-gray-500 dark:bg-gray-600'
               placeholder='First Name'
+              value={customerFirst}
               onChange={handleNameChange}
               required={true}
             />
@@ -62,6 +70,7 @@ const AddModal = (props) => {
               id='last_name'
               className='dark:border-gray-500 dark:bg-gray-600'
               placeholder='Last Name'
+              value={customerLast}
               onChange={handleLastChange}
               required={true}
             />
@@ -74,6 +83,7 @@ const AddModal = (props) => {
               id='email'
               className='dark:border-gray-500 dark:bg-gray-600'
               placeholder='name@company.com'
+              value={customerEmail}
               onChange={handleEmailChange}
               required={true}
             />
@@ -84,6 +94,7 @@ const AddModal = (props) => {
               type='date'
               className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
               placeholder='Select date'
+              value={customerBirthDate}
               onChange={handleBirthChange}
             />
           </div>
@@ -92,8 +103,9 @@ const AddModal = (props) => {
             <button
               className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800'
               onClick={() => {
-                addCustomer()
-                props.onAddNewCustomer()
+                addNewCustomer()
+                cleanCustomer()
+                props.onClose()
               }}
             >
               <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
@@ -104,6 +116,7 @@ const AddModal = (props) => {
               className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800'
               onClick={() => {
                 cleanCustomer()
+                props.onClose()
               }}
             >
               <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>

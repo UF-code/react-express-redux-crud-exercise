@@ -20,13 +20,6 @@ const EditModal = (props) => {
   const handleEmailChange = (e) => setCustomerEmail(e.target.value)
   const handleBirthChange = (e) => setCustomerBirthDate(e.target.value)
 
-  // const cleanCustomer = () => {
-  //   setCustomerFirst('')
-  //   setCustomerLast('')
-  //   setCustomerEmail('')
-  //   setCustomerBirthDate('')
-  // }
-
   const editCurrentCustomer = () => {
     axios
       .put(`/updateCustomer/${customerID}`, {

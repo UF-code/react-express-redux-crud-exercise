@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Button, Label, TextInput, Checkbox, Modal } from 'flowbite-react'
+import { Label, TextInput, Modal } from 'flowbite-react'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { temporaryCustomer } from '../../redux/customerSlice'
 
 const AddModal = (props) => {
@@ -17,19 +17,23 @@ const AddModal = (props) => {
   const handleEmailChange = (e) => setCustomerEmail(e.target.value)
   const handleBirthChange = (e) => setCustomerBirthDate(e.target.value)
 
+  const cleanCustomer = () => {
+    setCustomerFirst(null)
+    setCustomerLast(null)
+    setCustomerEmail(null)
+    setCustomerBirthDate(null)
+  }
+
   const addCustomer = () => {
     dispatch(
       temporaryCustomer({
+        id: Math.floor(Math.random() * 100) + 1,
         first_name: customerFirst,
         last_name: customerLast,
         email: customerEmail,
         birthdate: customerBirthDate,
       })
     )
-  }
-
-  if (!props.show) {
-    return null
   }
 
   return (
@@ -89,7 +93,7 @@ const AddModal = (props) => {
               className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800'
               onClick={() => {
                 addCustomer()
-                props.onClose()
+                props.onAddNewCustomer()
               }}
             >
               <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
@@ -98,7 +102,9 @@ const AddModal = (props) => {
             </button>
             <button
               className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800'
-              onClick={props.onClose}
+              onClick={() => {
+                cleanCustomer()
+              }}
             >
               <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
                 Cancel

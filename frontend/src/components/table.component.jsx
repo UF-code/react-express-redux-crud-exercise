@@ -3,14 +3,15 @@ import React, { useState } from 'react'
 import AddModal from './modals/add.modal.component'
 import EditModal from './modals/edit.modal.component'
 import DeleteModal from './modals/delete.modal.component'
-import { Button, Modal } from 'flowbite-react'
+// import { Button, Modal } from 'flowbite-react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addCustomer, deleteCustomer } from '../redux/customerSlice'
+import { addCustomer, deleteCustomer, temporaryCustomer } from '../redux/customerSlice'
 
 const TableComponent = () => {
   const dispatch = useDispatch()
   const customers = useSelector((state) => state.customers.customers)
+  const tmpCustomer = useSelector((state) => state.customers.tmpCustomer)
 
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
@@ -36,7 +37,9 @@ const TableComponent = () => {
           //     })
           //   )
           // }}
-          onClick={() => setShowAddModal(true)}
+          onClick={() => {
+            setShowAddModal(true)
+          }}
         >
           <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
             Add New Customer
@@ -142,7 +145,8 @@ const TableComponent = () => {
         onClose={() => {
           setShowAddModal(false)
         }}
-        onTest={() => {
+        onAddNewCustomer={() => {
+          console.log('hey')
           setShowAddModal(false)
         }}
       />

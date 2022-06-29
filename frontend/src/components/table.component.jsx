@@ -139,13 +139,14 @@ const TableComponent = () => {
           cst_id={modalData.id}
           cst_first={modalData.first_name}
           cst_last={modalData.last_name}
+          cst_email={modalData.email}
+          cst_birth={modalData.birthdate}
           show={showEditModal}
           onClose={() => {
             setShowEditModal(false)
             setModalData(null)
           }}
           onDelete={() => {
-            // dispatch(deleteCustomer(modalData.id))
             setModalData(null)
           }}
         />

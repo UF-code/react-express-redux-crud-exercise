@@ -1,5 +1,5 @@
 # Frontend
-  React, Redux, Tailwindcss
+  React, Redux, Axios, Tailwindcss
 
 # Backend
   Express, Sequelize, MySQL
